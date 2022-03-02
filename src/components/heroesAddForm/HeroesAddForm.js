@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import {useHttp} from '../../hooks/http.hook';
 import {useDispatch} from 'react-redux';
-import {heroAdd} from '../../actions';
+import {heroAdd, filters} from '../../actions';
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -21,6 +21,7 @@ const HeroesAddForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [element, setElement] = useState('')
+    const [filters, setFilters] = useState('')
 
     const {request} = useHttp();
     const dispatch = useDispatch();
