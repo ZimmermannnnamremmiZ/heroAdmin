@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import {useHttp} from '../../hooks/http.hook';
-import {useDispatch} from 'react-redux';
-import {heroAdd, filters} from '../../actions';
+import { useHttp } from '../../hooks/http.hook';
+import { heroAdd, filterFetching, filterFetched, filterFetchingError } from '../../actions';
+import Spinner from '../spinner/Spinner';
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -21,10 +22,38 @@ const HeroesAddForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [element, setElement] = useState('')
-    const [filters, setFilters] = useState('')
 
-    const {request} = useHttp();
+    const {filters, filterLoadingStatus} = useSelector(state => state);
     const dispatch = useDispatch();
+    const { request } = useHttp();
+
+    useEffect(() => {
+        dispatch(filterFetching());
+        request("http://localhost:3001/filters")
+            .then(data => dispatch(filterFetched(data)))
+            .catch(() => dispatch(filterFetchingError()))
+
+        // eslint-disable-next-line
+    }, []);
+
+    if (filterLoadingStatus === "loading") {
+        return <Spinner/>;
+    } else if (filterLoadingStatus === "error") {
+        return <h5 className="text-center mt-5">Ошибка загрузки</h5>
+    }
+
+    const renderOptionsList = (arr) => {
+        
+        if (arr.length === 0) {
+            return <option>Нет элементов</option>
+        }
+
+        return arr.map((el) => {
+            return (
+                <option key={uuidv4()} value={el.name}>{el.lable}</option>
+            )
+        })
+    }
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
@@ -43,6 +72,8 @@ const HeroesAddForm = () => {
         setDescription('')
         setElement('')
     }
+
+    const elements = renderOptionsList(filters);
 
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
@@ -80,14 +111,10 @@ const HeroesAddForm = () => {
                     onChange={el => setElement(el.target.value)}
                     value={element}
                 >
-                    <option>Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    <option value="" disabled selected hidden>Я владею элементом...</option>
+                    {elements}
                 </select>
             </div>
-
             <button type="submit" className="btn btn-primary">Создать</button>
         </form>
     )
