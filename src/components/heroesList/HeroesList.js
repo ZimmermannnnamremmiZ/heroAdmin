@@ -12,7 +12,16 @@ import './heroesList.scss';
 
 const HeroesList = () => {
     
-    const {heroes, filteredHeroList, heroesLoadingStatus} = useSelector(state => state);
+    const { heroes } = useSelector(state => {
+        if (state.activeFilter === 'all') {
+            return state.heroes
+        } else {
+            return state.heroes.filter((el) => {
+                return el.element === state.activeFilter
+            })
+        }
+    });
+    const { heroesLoadingStatus } = useSelector(state => state)
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -36,8 +45,6 @@ const HeroesList = () => {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 
-    
-
     const renderHeroesList = (arr) => {
         if (arr.length === 0) {
             return <h5 className="text-center mt-5">Героев пока нет</h5>
@@ -57,16 +64,12 @@ const HeroesList = () => {
                 </TransitionGroup>
     }
 
-
-
-    const allHeroes = renderHeroesList(heroes);
-    const filtered = renderHeroesList(filteredHeroList)
+    const heroesCards = renderHeroesList(heroes);
 
     return (
-
-            <ul>
-                {filteredHeroList.length ? filtered  : allHeroes}
-            </ul>
+        <ul>
+            {heroesCards}
+        </ul>
     )
 }
 
