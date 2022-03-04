@@ -1,2 +1,2 @@
-####SPA на React + Redux
+###SPA на React + Redux
 Данные персонажей и их фильтров приходят из heroes.json 
