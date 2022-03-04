@@ -53,23 +53,15 @@ const reducer = (state = initialState, action) => {
                 filtersLoadingStatus: 'error'
             }
         case 'FILTERED_BY_ELEMENTS':
-            const filteredHeroes = state.filters.filter((el) => {
-                return el.name === action.payload
+            const filteredHeroes = state.heroes.filter((el) => {
+                return el.element === action.payload
             })
             return {
                 ...state,
                 filteredHeroList: filteredHeroes,
-            }
-        case 'FILTER_HEROES':
-            return {
-                ...state,
-                filterChanged: action.payload
             }
         default: return state
     }
 }
 
 export default reducer;
-
-
-// filterButton: el.name

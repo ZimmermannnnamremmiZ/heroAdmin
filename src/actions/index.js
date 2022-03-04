@@ -50,16 +50,9 @@ export const filterFetchingError = () => {
     }
 }
 
-export const filteredByElements = (name) => {
+export const filteredByElements = (heroes) => {
     return {
         type: 'FILTERED_BY_ELEMENTS',
-        payload: name
-    }
-}
-
-export const filterHeroes = (element) => {
-    return {
-        type: 'FILTER_HEROES',
-        payload: element
+        payload: heroes
     }
 }

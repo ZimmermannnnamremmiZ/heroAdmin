@@ -1,14 +1,13 @@
 import { useHttp } from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 
 import { heroesFetching, heroesFetched, heroesFetchingError, heroDeleted } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
 const HeroesList = () => {
-    const {heroes, filteredHeroList, filterHeroes, heroesLoadingStatus} = useSelector(state => state);
+    const {heroes, filteredHeroList, heroesLoadingStatus} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -46,10 +45,9 @@ const HeroesList = () => {
 
     const elements = renderHeroesList(heroes);
     const filtered = renderHeroesList(filteredHeroList)
-    console.log(filteredHeroList)
     return (
         <ul>
-            {filterHeroes ? filtered : elements}
+            {filteredHeroList.length > 0 ? filtered : elements}
         </ul>
     )
 }

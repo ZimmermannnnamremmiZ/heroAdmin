@@ -6,17 +6,6 @@ import { useHttp } from '../../hooks/http.hook';
 import { heroAdd, filterFetching, filterFetched, filterFetchingError } from '../../actions';
 import Spinner from '../spinner/Spinner';
 
-// Задача для этого компонента:
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Усложненная задача:
-// Персонаж создается и в файле json при помощи метода POST
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
-
-
 const HeroesAddForm = () => {
 
     const [name, setName] = useState('')
@@ -49,6 +38,7 @@ const HeroesAddForm = () => {
         }
 
         return arr.map((el) => {
+            if (el.name === 'all') return;
             return (
                 <option key={uuidv4()} value={el.name}>{el.lable}</option>
             )
