@@ -2,6 +2,7 @@
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { useHttp } from '../../hooks/http.hook';
 import { heroesFetching, heroesFetched, heroesFetchingError, heroDeleted } from '../../actions';
@@ -12,16 +13,21 @@ import './heroesList.scss';
 
 const HeroesList = () => {
     
-    const { heroes } = useSelector(state => {
-        if (state.activeFilter === 'all') {
-            return state.heroes
-        } else {
-            return state.heroes.filter((el) => {
-                return el.element === state.activeFilter
-            })
+    const filteredHeroesSelector = createSelector(
+        (state) => state.filters.activeFilter,
+        (state) => state.heroes.heroes,
+
+        (filter, heroes) => {
+            if (filter === 'all') {
+                return heroes;
+            } else {
+                return heroes.filter((el) => el.element === filter)
+            }
         }
-    });
-    const { heroesLoadingStatus } = useSelector(state => state)
+    )
+
+    const filteredHeroes = useSelector(filteredHeroesSelector);
+    const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus)
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -64,7 +70,7 @@ const HeroesList = () => {
                 </TransitionGroup>
     }
 
-    const heroesCards = renderHeroesList(heroes);
+    const heroesCards = renderHeroesList(filteredHeroes);
 
     return (
         <ul>
