@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useHttp } from '../../hooks/http.hook';
-import { filteredByElements, filterFetching, filterFetched, filterFetchingError } from '../../actions';
+import { filterByElement, filterFetching, filterFetched, filterFetchingError } from '../../actions';
 import Spinner from '../spinner/Spinner';
 
 
 
 const HeroesFilters = () => {
-    const {filters, filterLoadingStatus} = useSelector(state => state);
+    const {filters, filterLoadingStatus} = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const { request } = useHttp();
 
@@ -18,7 +18,7 @@ const HeroesFilters = () => {
         request("http://localhost:3001/filters")
             .then(data => dispatch(filterFetched(data)))
             .catch(() => dispatch(filterFetchingError()))
-    
+
         // eslint-disable-next-line
     }, []);
 
@@ -44,7 +44,7 @@ const HeroesFilters = () => {
     }
 
     const onFilter = (item) => {
-        dispatch(filteredByElements(item));
+        dispatch(filterByElement(item));
     }
 
     const elements = renderButtonsList(filters);
