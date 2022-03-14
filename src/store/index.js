@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import heroes from '../components/heroesList/heroesSlice';
-import filters from '../reducers/filters';
+import filters from '../components/heroesFilters/filtersSlice';
 
 const store = configureStore({
     reducer: {heroes, filters},
-    devTools: process.env.NODE_ENV !== 'production'
+    devTools: process.env.NODE_ENV !== 'production',
 })
 
 export default store;

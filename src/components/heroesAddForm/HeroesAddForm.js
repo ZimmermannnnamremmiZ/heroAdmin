@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -29,7 +29,7 @@ const HeroesAddForm = () => {
     }
 
     const renderOptionsList = (arr) => {
-        
+
         if (arr.length === 0) {
             return <option>Нет элементов</option>
         }
@@ -66,12 +66,12 @@ const HeroesAddForm = () => {
         <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
-                <input 
+                <input
                     required
-                    type="text" 
+                    type="text"
                     name="name"
-                    className="form-control" 
-                    id="name" 
+                    className="form-control"
+                    id="name"
                     placeholder="Как меня зовут?"
                     onChange={el => setName(el.target.value)}
                     value={name}/>
@@ -80,9 +80,9 @@ const HeroesAddForm = () => {
                 <label htmlFor="description" className="form-label fs-4">Описание</label>
                 <textarea
                     required
-                    name="description" 
-                    className="form-control" 
-                    id="description" 
+                    name="description"
+                    className="form-control"
+                    id="description"
                     placeholder="Что я умею?"
                     style={{"height": '130px'}}
                     onChange={el => setDescription(el.target.value)}
@@ -90,9 +90,9 @@ const HeroesAddForm = () => {
             </div>
             <div className="mb-3">
                 <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
-                <select 
+                <select
                     required
-                    className="form-select" 
+                    className="form-select"
                     id="element"
                     name="element"
                     onChange={el => setElement(el.target.value)}

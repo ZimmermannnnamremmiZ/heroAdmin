@@ -8,8 +8,8 @@ const initialState = {
 const heroesSlice = createSlice({
     name: 'heroes',
     initialState,
-    redusers: {
-        //Иммутация за счет Immer 
+    reducers: {
+        //Иммутация за счет Immer
 
         heroesFetching: state => {
             state.heroesLoadingStatus = 'loading'
@@ -33,6 +33,7 @@ const heroesSlice = createSlice({
 const {actions, reducer} = heroesSlice;
 
 export default reducer;
+
 export const {
     heroesFetching,
     heroesFetched,

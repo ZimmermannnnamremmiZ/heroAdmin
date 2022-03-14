@@ -1,15 +1,16 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useHttp } from '../../hooks/http.hook';
-import { filterByElement, fetchFilter } from '../../actions';
+import { fetchFilter } from '../../actions';
+import { filterByElement } from './filtersSlice';
 import Spinner from '../spinner/Spinner';
 
 
 
 const HeroesFilters = () => {
-    const {filters, filterLoadingStatus} = useSelector(state => state.filters);
+    const { filters, filterLoadingStatus } = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const { request } = useHttp();
 
@@ -25,7 +26,7 @@ const HeroesFilters = () => {
     }
 
     const renderButtonsList = (arr) => {
-        
+
         if (arr.length === 0) {
             return <div>Ошибка загрузки элементов</div>
         }
