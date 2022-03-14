@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useHttp } from '../../hooks/http.hook';
-import { heroAdd, fetchFilter } from '../../actions';
+import { heroAdd } from '../heroesList/heroesSlice';
+import { fetchFilter } from '../../actions';
 import Spinner from '../spinner/Spinner';
 
 const HeroesAddForm = () => {
