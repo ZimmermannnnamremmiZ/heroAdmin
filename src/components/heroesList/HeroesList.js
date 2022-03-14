@@ -1,18 +1,19 @@
 
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { useHttp } from '../../hooks/http.hook';
-import { fetchHeroes, heroDeleted } from '../../actions';
+import { fetchHeroes } from '../../actions';
+import { heroDeleted } from './heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
 import './heroesList.scss';
 
 const HeroesList = () => {
-    
+
     const filteredHeroesSelector = createSelector(
         (state) => state.filters.activeFilter,
         (state) => state.heroes.heroes,
