@@ -1,11 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import { useHttp } from '../../hooks/http.hook';
 
-const initialState = {
-    heroes: [],
-    heroesLoadingStatus: 'idle'
-}
+// createEntityAdapter() возвращает объект с готовыми методами, коллбеками, мемоизированными селекторами (функции, позволяющие вытащить часть store) и имеющий определенную структуру
+
+const heroesAdapter = createEntityAdapter()
+
+// const initialState = {
+//     heroes: [],
+//     heroesLoadingStatus: 'idle'
+// }
+
+const initialState = heroesAdapter.getInitialState({
+    heroesLoadingStatus: 'idle'   // добавили дополнительное свойство в initial state
+})
 
 export const fetchHeroes = createAsyncThunk(
     'heroes/fetchHeroes',
