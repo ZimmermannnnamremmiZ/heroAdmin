@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useHttp } from '../../hooks/http.hook';
 import { heroAdd } from '../heroesList/heroesSlice';
-import { fetchFilter } from '../../actions';
+import { fetchFilters } from '../heroesFilters/filtersSlice';
 import Spinner from '../spinner/Spinner';
 
 const HeroesAddForm = () => {
@@ -18,7 +18,7 @@ const HeroesAddForm = () => {
     const { request } = useHttp();
 
     useEffect(() => {
-        dispatch(fetchFilter(request));
+        dispatch(fetchFilters());
         // eslint-disable-next-line
     }, []);
 
