@@ -2,17 +2,19 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { fetchFilters, filterByElement } from './filtersSlice';
+import { useHttp } from '../../hooks/http.hook';
+import { fetchFilters, filterByElement, selectAll } from './filtersSlice';
 import Spinner from '../spinner/Spinner';
-
-
+import store from '../../store';
 
 const HeroesFilters = () => {
-    const { filters, filterLoadingStatus } = useSelector(state => state.filters);
+    const { filterLoadingStatus } = useSelector(state => state.filters);
+    const filters = selectAll(store.getState());
     const dispatch = useDispatch();
-
+    const { request } = useHttp();
+    
     useEffect(() => {
-        dispatch(fetchFilters())
+        dispatch(fetchFilters(request))
         // eslint-disable-next-line
     }, []);
 
@@ -25,7 +27,7 @@ const HeroesFilters = () => {
     const renderButtonsList = (arr) => {
 
         if (arr.length === 0) {
-            return <div>Ошибка загрузки элементов</div>
+            return <h5 className="text-center mt-5">Фильтры не найдены</h5>
         }
 
         return arr.map((el) => {
