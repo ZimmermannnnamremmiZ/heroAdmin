@@ -1,29 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import store from '../../store'
-import { selectAll } from '../heroesFilters/filtersSlice';
-import { useHttp } from '../../hooks/http.hook';
-import { heroAdd } from '../heroesList/heroesSlice';
-import { fetchFilters } from '../heroesFilters/filtersSlice';
+import store from '../../store';
+
+import { useCreateHeroMutation } from '../../api/apiSlice';
+import {  selectAll } from '../heroesFilters/filtersSlice';
 import Spinner from '../spinner/Spinner';
 
 const HeroesAddForm = () => {
 
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [element, setElement] = useState('')
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [element, setElement] = useState('');
+
+    const [createHero, {isLoading}] = useCreateHeroMutation();
 
     const {filterLoadingStatus} = useSelector(state => state.filters);
-    const filters = selectAll(store.getState())
-    const dispatch = useDispatch();
-    const { request } = useHttp();
-
-    useEffect(() => {
-        dispatch(fetchFilters());
-        // eslint-disable-next-line
-    }, []);
+    const filters = selectAll(store.getState());
 
     if (filterLoadingStatus === "loading") {
         return <Spinner/>;
@@ -55,8 +49,7 @@ const HeroesAddForm = () => {
             element
         }
 
-        request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
-            .then(data => dispatch(heroAdd(data)))
+        createHero(newHero).unwrap();
 
         setName('')
         setDescription('')
