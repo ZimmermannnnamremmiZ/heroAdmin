@@ -38,7 +38,7 @@ const HeroesList = () => {
             return <h5 className="text-center mt-5">Героев пока нет</h5>
         }
 
-        return  <TransitionGroup>
+        return  <TransitionGroup component={null}>
                     {arr.map(({id,  ...props}) => {
                         return <CSSTransition
                                     key={id}
