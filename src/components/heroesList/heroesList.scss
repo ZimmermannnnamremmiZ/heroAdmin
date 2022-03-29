@@ -1,3 +1,7 @@
+@import '../../styles/calcFontSize.scss';
+@import '../../styles/adaptive.scss';
+
+
 .remove-btn {
     margin-right: 0.5rem;
 }
@@ -18,4 +22,16 @@
 .item-exit-active {
     opacity: 0;
     transition: opacity 500ms ease-in;
+}
+
+.card-title {
+    @include respond-to(1125px) {
+        font-size: calcFluidFontSize(16, 28, 380, 1125);
+    }
+}
+
+.card-text {
+    @include respond-to(1125px) {
+        font-size: calcFluidFontSize(14, 16, 380, 1125);
+    }
 }

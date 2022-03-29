@@ -7,12 +7,14 @@ import { fetchFilters, filterByElement, selectAll } from './filtersSlice';
 import Spinner from '../spinner/Spinner';
 import store from '../../store';
 
+import './heroesFilters.scss';
+
 const HeroesFilters = () => {
     const { filterLoadingStatus } = useSelector(state => state.filters);
     const filters = selectAll(store.getState());
     const dispatch = useDispatch();
     const { request } = useHttp();
-    
+
     useEffect(() => {
         dispatch(fetchFilters(request))
         // eslint-disable-next-line

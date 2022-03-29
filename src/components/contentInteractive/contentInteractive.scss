@@ -1,0 +1,48 @@
+@import '../../styles/adaptive.scss';
+
+.offcanvas {
+  background-color: transparent !important;
+  border: none !important;
+  height: max-content;
+}
+
+.offcanvas-body > form {
+  background-color: #fff;
+}
+
+.content__interactive_start {
+  position: absolute;
+  top: 20px;
+  left: 5%;
+  background-color: #ececec !important;
+}
+
+.content__interactive_end {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  background-color: #ececec !important;
+}
+
+@include respond-to(768px) {
+  .content__interactive_filter{
+    position: absolute;
+    top: 20px;
+    right: 0;
+  }
+
+  .offcanvas-body > .mt-4 {
+    margin-top: 0 !important;
+  }
+}
+
+.offcanvas-body > .shadow-lg{
+  box-shadow: none !important;
+}
+
+.offcanvas-header > .btn-close {
+  position: absolute;
+  right: 30px;
+  top: 60px;
+  z-index: 1;
+}
