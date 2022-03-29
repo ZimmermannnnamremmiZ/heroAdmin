@@ -1,0 +1,21 @@
+@import '../../styles/calcFontSize.scss';
+@import '../../styles/adaptive.scss';
+
+.form-name-lable, .form-dscr-lable {
+  font-size: 24px;
+  @include respond-to(1125px) {
+    font-size: calcFluidFontSize(14, 24, 380, 1125);
+  }
+}
+
+.form-control {
+  @include respond-to(1125px) {
+    font-size: calcFluidFontSize(14, 18, 380, 1125) !important;
+  }
+}
+
+.form-select {
+  @include respond-to(1125px) {
+    font-size: calcFluidFontSize(12, 16, 380, 1125) !important;
+  }
+}

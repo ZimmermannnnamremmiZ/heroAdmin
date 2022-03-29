@@ -1,16 +1,34 @@
+@import '../../styles/adaptive.scss';
+
 .app {
     height: 100vh;
     overflow-y: scroll;
-    background: url('../../assets/hero_bg.jpg') center / cover no-repeat;
+    overflow-x: hidden;
+    background: url('../../assets/hero_bg.jpg') 33% / cover no-repeat;
 }
 
 .content {
     display: grid;
-    grid-template-columns: 560px 440px;
+    @include respond-to(768px) {display: block;}
+    grid-template-columns: 56% 44%;
     max-width: 1040px;
+    @include respond-to(1125px) {max-width: 90%;}
     margin: 0 auto;
     padding-top: 50px;
+    @include respond-to(768px) {padding-top: 78px;}
+
     &__interactive {
         padding-left: 40px;
     }
 }
+
+.content__interactive {
+    @include respond-to(768px) {
+        top: 20px;
+        position: absolute;
+        background-color: #fff;
+        padding-left: 0;
+        width: 90%;
+    }
+}
+

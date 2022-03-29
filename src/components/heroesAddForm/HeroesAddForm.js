@@ -8,6 +8,8 @@ import { useCreateHeroMutation } from '../../api/apiSlice';
 import {  selectAll } from '../heroesFilters/filtersSlice';
 import Spinner from '../spinner/Spinner';
 
+import './heroesAddForm.scss';
+
 const HeroesAddForm = () => {
 
     const [name, setName] = useState('');
@@ -61,7 +63,7 @@ const HeroesAddForm = () => {
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
             <div className="mb-3">
-                <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
+                <label htmlFor="name" className="form-label form-name-lable">Имя нового героя</label>
                 <input
                     required
                     type="text"
@@ -73,7 +75,7 @@ const HeroesAddForm = () => {
                     value={name}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="description" className="form-label fs-4">Описание</label>
+                <label htmlFor="description" className="form-label form-dscr-lable">Описание</label>
                 <textarea
                     required
                     name="description"

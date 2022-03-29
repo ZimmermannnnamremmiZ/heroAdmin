@@ -1,1 +1,7 @@
-This is test project with hero admin panel!
+## SPA на React + Redux
+
+Данные персонажей и их фильтров приходят из heroes.json 
+
+В данном проекте я изучаю и тестирую Redux
+
+# Проект не доделан
